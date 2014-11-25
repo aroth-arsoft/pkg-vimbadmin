@@ -1,0 +1,9 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: vimbadmin
+Source: https://github.com/opensolutions/ViMbAdmin
+Copyright: 2011-2014 Open Solutions <sales@opensolutions.ie>
+License:   GPL-3
+
+Files:     *
+License:   GPL-3
+
