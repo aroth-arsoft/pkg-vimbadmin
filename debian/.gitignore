@@ -1,0 +1,5 @@
+/vimbadmin/
+*.substvars
+*.log
+/files
+/tmp/

@@ -1,6 +1,6 @@
 Source: vimbadmin
-Section: gnome
-Priority: optional
+Section: web
+Priority: extra
 Maintainer: Andreas Roth <aroth@arsoft-online.com>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.5
@@ -10,7 +10,16 @@ Homepage: http://www.vimbadmin.net/
 
 Package: vimbadmin
 Architecture: all
-Depends: ${misc:Depends}
+Depends: libapache2-mod-php5 | libapache2-mod-php5filter | php5-cgi | php5-fpm | php5,
+    php5-mysql | php5-mysqli | php5-mysqlnd,
+    ${misc:Depends},
+    dbconfig-common
+Recommends: apache2 | lighttpd | httpd,
+    php5-gd,
+    mysql-client | mariadb-client | virtual-mysql-client,
+    php-tcpdf
+Suggests: mysql-server | maridadb-server | virtual-mysql-server,
+    www-browser
 Description: Virtual Mailbox Administration (vim-be-admin)
  The ViMbAdmin project (vim-be-admin) provides a web based virtual mailbox
  administration system to allow mail administrators to easily manage
