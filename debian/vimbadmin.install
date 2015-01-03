@@ -2,3 +2,4 @@ etc/vimbadmin
 usr/share/vimbadmin
 var/lib/vimbadmin
 usr/bin/vimbtool
+var/log

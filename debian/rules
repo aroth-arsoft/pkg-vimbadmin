@@ -19,9 +19,21 @@ override_dh_install:
 	mv $(DESTDIR)/usr/share/$(PKG)/application/configs/* $(DESTDIR)/etc/$(PKG)
 	rmdir $(DESTDIR)/usr/share/$(PKG)/application/configs
 	ln -s /etc/$(PKG) $(DESTDIR)/usr/share/$(PKG)/application/configs
-	mkdir -p $(DESTDIR)/var/lib/$(PKG)
-	cp -r var $(DESTDIR)/var/lib/$(PKG)
+	install -m 0640 $(CURDIR)/debian/conf/*.ini $(DESTDIR)/etc/$(PKG)
+	mkdir -p $(DESTDIR)/usr/share/$(PKG)/vendor
+	cp -r $(CURDIR)/debian/vendor $(DESTDIR)/usr/share/$(PKG)
+	install -d -m 0750 -o www-data -g www-data $(DESTDIR)/var/lib/$(PKG)
+	cp -r var/* $(DESTDIR)/var/lib/$(PKG)
+	rm -rf $(DESTDIR)/var/lib/$(PKG)/log
+	ln -s /var/log $(DESTDIR)/var/lib/$(PKG)/log
+	mkdir -p $(DESTDIR)/var/log
+	touch $(DESTDIR)/var/log/vimbadmin.log
+	chmod 640 $(DESTDIR)/var/log/vimbadmin.log
+	chown www-data.www-data $(DESTDIR)/var/log/vimbadmin.log
 	ln -s /var/lib/$(PKG) $(DESTDIR)/usr/share/$(PKG)/var
 	mkdir -p $(DESTDIR)/usr/bin
 	ln -s /usr/share/vimbadmin/bin/vimbtool.php $(DESTDIR)/usr/bin/vimbtool
+	mv $(DESTDIR)/usr/share/$(PKG)/public/.htaccess.dist $(DESTDIR)/usr/share/$(PKG)/public/.htaccess
+	mkdir -p $(DESTDIR)/usr/share/$(PKG)/sql
+	cp debian/mysql-vimbadmin.sql $(DESTDIR)/usr/share/$(PKG)/sql
 	dh_install

@@ -1,0 +1,3 @@
+debian/vendor/opensolutions/minify/yuicompressor.jar
+debian/vendor/opensolutions/minify/yuicompressor-2.4.8.jar
+debian/vendor/opensolutions/minify/compiler.jar

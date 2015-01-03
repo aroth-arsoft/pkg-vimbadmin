@@ -13,6 +13,8 @@ Architecture: all
 Depends: libapache2-mod-php5 | libapache2-mod-php5filter | php5-cgi | php5-fpm | php5,
     php5-mysql | php5-mysqli | php5-mysqlnd,
     ${misc:Depends},
+    smarty3, php5-cli, zend-framework, php-doctrine-dbal, php-doctrine-orm,
+    php-symfony-console,
     dbconfig-common
 Recommends: apache2 | lighttpd | httpd,
     php5-gd,
