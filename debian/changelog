@@ -1,3 +1,9 @@
+vimbadmin (3.0.10-0.3) utopic; urgency=medium
+
+  * add missing vendor extension 
+
+ -- Andreas Roth <aroth@arsoft-online.com>  Sun, 04 Jan 2015 16:35:07 +0100
+
 vimbadmin (3.0.10-0.2) utopic; urgency=medium
 
   * use existing packages and ship with missing vendor extensions
