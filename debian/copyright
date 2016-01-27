@@ -1,9 +1,16 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: vimbadmin
 Source: https://github.com/opensolutions/ViMbAdmin
-Copyright: 2011-2014 Open Solutions <sales@opensolutions.ie>
-License:   GPL-3
 
-Files:     *
-License:   GPL-3
+Files: *
+Copyright: 2011-2016 Open Solutions <sales@opensolutions.ie>
+License: GPL-3
 
+Files: debian/*
+Copyright: 2015-2016 Andreas Roth <aroth@arsoft-online.com>
+License: GPL-3
+
+License: GPL-3+
+ On Debian systems the full text of the GNU General Public
+ License can be found in the `/usr/share/common-licenses/GPL'
+ file.

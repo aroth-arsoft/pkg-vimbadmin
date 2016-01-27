@@ -12,6 +12,7 @@ override_dh_install:
 	chmod 0644 $(DESTDIR)/usr/share/vimbadmin/application/views/error/error.phtml
 	chmod 0644 $(DESTDIR)/usr/share/vimbadmin/application/views/error/insufficient-permissions.phtml
 	chmod 0644 $(DESTDIR)/usr/share/vimbadmin/application/views/form_elements_errors.phtml
+	chmod 0644 $(DESTDIR)/usr/share/vimbadmin/doctrine2/ViMbAdmin.ormdesigner
 	mkdir -p $(DESTDIR)/usr/share/$(PKG)/bin
 	install -m 0755 bin/vimbtool.php $(DESTDIR)/usr/share/$(PKG)/bin
 	install -m 0644 bin/utils.inc $(DESTDIR)/usr/share/$(PKG)/bin
@@ -22,6 +23,16 @@ override_dh_install:
 	install -m 0640 $(CURDIR)/debian/conf/*.ini $(DESTDIR)/etc/$(PKG)
 	mkdir -p $(DESTDIR)/usr/share/$(PKG)/vendor
 	cp -r $(CURDIR)/debian/vendor $(DESTDIR)/usr/share/$(PKG)
+	# correct permissions
+	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/doctrine
+	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/doctrine-dbal
+	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/minify.php
+	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/minify-options.php.dist
+	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/minify.php
+	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/bin/combine-js.sh
+	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/bin/phpdoc.sh
+	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/bin/sync-gh.sh
+
 	install -d -m 0750 -o www-data -g www-data $(DESTDIR)/var/lib/$(PKG)
 	cp -r var/* $(DESTDIR)/var/lib/$(PKG)
 	rm -rf $(DESTDIR)/var/lib/$(PKG)/log
@@ -30,6 +41,14 @@ override_dh_install:
 	touch $(DESTDIR)/var/log/vimbadmin.log
 	chmod 640 $(DESTDIR)/var/log/vimbadmin.log
 	chown www-data.www-data $(DESTDIR)/var/log/vimbadmin.log
+	# remove extra license files
+	rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/LICENSE
+	rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/LICENSE
+	rm $(DESTDIR)/usr/share/vimbadmin/vendor/komola/bootstrap-zend-framework/LICENSE
+	# remove git files
+	rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/.gitignore
+	rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/.gitignore
+	rm $(DESTDIR)/usr/share/vimbadmin/vendor/komola/bootstrap-zend-framework/.gitignore
 	ln -s /var/lib/$(PKG) $(DESTDIR)/usr/share/$(PKG)/var
 	mkdir -p $(DESTDIR)/usr/bin
 	ln -s /usr/share/vimbadmin/bin/vimbtool.php $(DESTDIR)/usr/bin/vimbtool
@@ -37,3 +56,4 @@ override_dh_install:
 	mkdir -p $(DESTDIR)/usr/share/$(PKG)/sql
 	cp debian/mysql-vimbadmin.sql $(DESTDIR)/usr/share/$(PKG)/sql
 	dh_install
+	rm -rf $(DESTDIR)/var/log/.hello-git
