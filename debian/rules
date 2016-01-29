@@ -26,9 +26,9 @@ override_dh_install:
 	# correct permissions
 	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/doctrine
 	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/doctrine-dbal
-	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/minify.php
-	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/minify-options.php.dist
-	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/minify.php
+	#chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/minify.php
+	#chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/minify-options.php.dist
+	#chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/minify.php
 	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/bin/combine-js.sh
 	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/bin/phpdoc.sh
 	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/bin/sync-gh.sh
@@ -41,19 +41,26 @@ override_dh_install:
 	touch $(DESTDIR)/var/log/vimbadmin.log
 	chmod 640 $(DESTDIR)/var/log/vimbadmin.log
 	chown www-data.www-data $(DESTDIR)/var/log/vimbadmin.log
+	
+	mkdir -p $(DESTDIR)/usr/share/vimbadmin/sql/
+	# this requires some config to work
+	$(DESTDIR)/usr/share/vimbadmin/bin/doctrine2-cli.php orm:schema-tool:create --dump-sql > $(DESTDIR)/usr/share/vimbadmin/sql/vimbadmin-mysql.sql
+
 	# remove extra license files
 	rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/LICENSE
-	rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/LICENSE
+	#rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/LICENSE
 	rm $(DESTDIR)/usr/share/vimbadmin/vendor/komola/bootstrap-zend-framework/LICENSE
 	# remove git files
-	rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/.gitignore
-	rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/.gitignore
-	rm $(DESTDIR)/usr/share/vimbadmin/vendor/komola/bootstrap-zend-framework/.gitignore
+	-rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/.gitignore
+	#-rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/.gitignore
+	-rm $(DESTDIR)/usr/share/vimbadmin/vendor/komola/bootstrap-zend-framework/.gitignore
 	ln -s /var/lib/$(PKG) $(DESTDIR)/usr/share/$(PKG)/var
 	mkdir -p $(DESTDIR)/usr/bin
 	ln -s /usr/share/vimbadmin/bin/vimbtool.php $(DESTDIR)/usr/bin/vimbtool
 	mv $(DESTDIR)/usr/share/$(PKG)/public/.htaccess.dist $(DESTDIR)/usr/share/$(PKG)/public/.htaccess
 	mkdir -p $(DESTDIR)/usr/share/$(PKG)/sql
 	cp debian/mysql-vimbadmin.sql $(DESTDIR)/usr/share/$(PKG)/sql
+	ln -s /usr/share/php/smarty3/Smarty.class.php $(DESTDIR)/usr/share/vimbadmin/library/Smarty/Smarty.class.php
+	ln -s /usr/share/php/smarty3/SmartyBC.class.php $(DESTDIR)/usr/share/vimbadmin/library/Smarty/SmartyBC.class.php
 	dh_install
 	rm -rf $(DESTDIR)/var/log/.hello-git
