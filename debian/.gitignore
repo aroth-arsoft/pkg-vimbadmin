@@ -3,3 +3,4 @@
 *.log
 /files
 /tmp/
+/debhelper-build-stamp

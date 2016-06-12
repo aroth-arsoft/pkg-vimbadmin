@@ -15,6 +15,7 @@ override_dh_install:
 	chmod 0644 $(DESTDIR)/usr/share/vimbadmin/doctrine2/ViMbAdmin.ormdesigner
 	mkdir -p $(DESTDIR)/usr/share/$(PKG)/bin
 	install -m 0755 bin/vimbtool.php $(DESTDIR)/usr/share/$(PKG)/bin
+	install -m 0755 bin/doctrine2-cli.php $(DESTDIR)/usr/share/$(PKG)/bin
 	install -m 0644 bin/utils.inc $(DESTDIR)/usr/share/$(PKG)/bin
 	mkdir -p $(DESTDIR)/etc/$(PKG)
 	mv $(DESTDIR)/usr/share/$(PKG)/application/configs/* $(DESTDIR)/etc/$(PKG)
@@ -26,6 +27,7 @@ override_dh_install:
 	# correct permissions
 	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/doctrine
 	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/doctrine-dbal
+	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/minify.php
 	#chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/bin/minify.php
 	#chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/minify-options.php.dist
 	#chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/minify.php
@@ -60,7 +62,10 @@ override_dh_install:
 	mv $(DESTDIR)/usr/share/$(PKG)/public/.htaccess.dist $(DESTDIR)/usr/share/$(PKG)/public/.htaccess
 	mkdir -p $(DESTDIR)/usr/share/$(PKG)/sql
 	cp debian/mysql-vimbadmin.sql $(DESTDIR)/usr/share/$(PKG)/sql
-	ln -s /usr/share/php/smarty3/Smarty.class.php $(DESTDIR)/usr/share/vimbadmin/library/Smarty/Smarty.class.php
-	ln -s /usr/share/php/smarty3/SmartyBC.class.php $(DESTDIR)/usr/share/vimbadmin/library/Smarty/SmartyBC.class.php
+	#ln -s /usr/share/php/smarty3/Smarty.class.php $(DESTDIR)/usr/share/vimbadmin/library/Smarty/Smarty.class.php
+	#ln -s /usr/share/php/smarty3/SmartyBC.class.php $(DESTDIR)/usr/share/vimbadmin/library/Smarty/SmartyBC.class.php
 	dh_install
-	rm -rf $(DESTDIR)/var/log/.hello-git
+	#mv $(DESTDIR)/usr/share/doc/vimbadmin/CHANGELOG.gz $(DESTDIR)/usr/share/doc/vimbadmin/changelog.gz
+	# remove all git placeholder files
+	find $(DESTDIR) -type f -name '.hello-git' -delete
+
