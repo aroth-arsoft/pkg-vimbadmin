@@ -1,3 +1,9 @@
+vimbadmin (3.0.15-0.2) xenial; urgency=medium
+
+  * try to fix missing depends
+
+ -- Andreas Roth <aroth@arsoft-online.com>  Sun, 12 Jun 2016 11:46:14 +0200
+
 vimbadmin (3.0.15-0.1) xenial; urgency=medium
 
   * new upstream version 3.0.15
