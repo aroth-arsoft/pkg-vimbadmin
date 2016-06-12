@@ -163,7 +163,7 @@ trait OSS_Controller_Trait_Auth
                             $this->getSessionNamespace()->last_login_at   = $user->getPreference( 'auth.last_login_at' );
                         }
                         $user->setPreference( 'auth.last_login_from', $_SERVER['REMOTE_ADDR'] );
-                        $user->setPreference( 'auth.last_login_at',   mktime()                );
+                        $user->setPreference( 'auth.last_login_at',   time()                );
                     }
 
                     if( isset( $this->_options['resources']['auth']['oss']['login_history']['enabled'] )
@@ -177,7 +177,7 @@ trait OSS_Controller_Trait_Auth
                     }
 
                     // set the timeout
-                    $this->getSessionNamespace()->timeOfLastAction = mktime();
+                    $this->getSessionNamespace()->timeOfLastAction = time();
 
                     $this->getLogger()->info( sprintf( _( "%s logged in" ), $user->getUsername() ) );
 
@@ -370,7 +370,7 @@ trait OSS_Controller_Trait_Auth
                 if( $user->cleanExpiredPreferences() )
                     $this->getD2EM()->flush();
 
-                if( !in_array( $form->getValue( 'token' ), $user->getIndexedPreference( 'tokens.password_reset' ) ) )
+                if( !is_array( $user->getIndexedPreference( 'tokens.password_reset' ) ) || !in_array( $form->getValue( 'token' ), $user->getIndexedPreference( 'tokens.password_reset' ) ) )
                 {
                     $this->addMessage(
                         'Invalid username / token combination. Please check your details and try again.',
