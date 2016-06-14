@@ -5,6 +5,12 @@
 $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
+$doctrine_dir = '/usr/share/php';
+$symfony_dir = '/usr/share/php';
+
 return array(
-    'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Component\\Console\\' => array($symfony_dir . '/Symfony/Component/Console'),
+    'Doctrine\\Common\\Cache\\' => array($doctrine_dir . '/Doctrine/Common/Cache'),
+    'Doctrine\\Common\\' => array($doctrine_dir . '/Doctrine/Common'),
 );

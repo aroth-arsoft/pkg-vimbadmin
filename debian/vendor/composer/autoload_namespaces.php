@@ -12,14 +12,8 @@ $symfony_dir = '/usr/share/php';
 return array(
     'Zend_' => array($zend_framework_dir),
     'Twitter_' => array($vendorDir . '/komola/bootstrap-zend-framework/library'),
-    'Symfony\\Component\\Console\\' => array($symfony_dir),
     'OSS_' => array($vendorDir . '/opensolutions/oss-framework/src'),
     'Doctrine\\ORM\\' => array($doctrine_dir),
     'Doctrine\\DBAL\\' => array($doctrine_dir),
-    'Doctrine\\Common\\Lexer\\' => array($doctrine_dir),
-    'Doctrine\\Common\\Inflector\\' => array($doctrine_dir),
-    'Doctrine\\Common\\Collections\\' => array($doctrine_dir),
-    'Doctrine\\Common\\Cache\\' => array($doctrine_dir),
-    'Doctrine\\Common\\Annotations\\' => array($doctrine_dir),
     'Doctrine\\Common\\' => array($doctrine_dir),
 );
