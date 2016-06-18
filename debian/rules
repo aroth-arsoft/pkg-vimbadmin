@@ -51,11 +51,15 @@ override_dh_install:
 	rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/LICENSE
 	#rm $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/minify/LICENSE
 	rm $(DESTDIR)/usr/share/vimbadmin/vendor/komola/bootstrap-zend-framework/LICENSE
+	rm $(DESTDIR)/usr/share/vimbadmin/vendor/doctrine/common/LICENSE
+	rm $(DESTDIR)/usr/share/vimbadmin/vendor/symfony/polyfill-mbstring/LICENSE
+
 	mkdir -p $(DESTDIR)/usr/bin
 	ln -s ../../usr/share/vimbadmin/bin/vimbtool.php $(DESTDIR)/usr/bin/vimbtool
 	mv $(DESTDIR)/usr/share/$(PKG)/public/.htaccess.dist $(DESTDIR)/usr/share/$(PKG)/public/.htaccess
 	mkdir -p $(DESTDIR)/usr/share/$(PKG)/sql
-	# this requires some config to work (esp. application.ini)
+	# this requires some config to work (esp. application.ini) and requires direct access to a running database
+	# so we should stick to a prebuilt database schema instead
 	$(DESTDIR)/usr/share/vimbadmin/bin/doctrine2-cli.php orm:schema-tool:create --dump-sql > $(DESTDIR)/usr/share/$(PKG)/sql/vimbadmin-mysql.sql
 
 	#ln -s /usr/share/php/smarty3/Smarty.class.php $(DESTDIR)/usr/share/vimbadmin/library/Smarty/Smarty.class.php

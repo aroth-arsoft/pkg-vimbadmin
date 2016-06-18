@@ -4,6 +4,7 @@ vimbadmin: source-is-missing public/js/110-jquery-ui.js
 vimbadmin: source-is-missing public/js/120-jquery.validate.js
 vimbadmin: source-is-missing public/js/130-jquery.colorbox.js
 vimbadmin: source-is-missing public/js/150-jquery.datatables.js
+vimbadmin: source-is-missing public/js/300-chosen.jquery.js
 vimbadmin: source-is-missing public/js/min.bundle-v15.js
 vimbadmin: php-script-but-no-phpX-cli-dep usr/share/vimbadmin/bin/doctrine2-cli.php
 vimbadmin: php-script-but-no-phpX-cli-dep usr/share/vimbadmin/bin/vimbtool.php
