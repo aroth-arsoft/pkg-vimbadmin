@@ -1,0 +1,20 @@
+#!/bin/sh -e
+PKG=vimbadmin
+
+case "$1" in
+	configure|upgrade)
+        chown www-data.www-data -R /var/lib/vimbadmin/templates_c
+        chown www-data.www-data -R /var/lib/vimbadmin/tmp
+        chown www-data.www-data -R /var/lib/vimbadmin/cache
+        chown www-data.www-data -R /var/lib/vimbadmin/session
+        touch /var/log/vimbadmin.log
+        chmod 640 /var/log/vimbadmin.log
+        chown www-data.www-data -R /var/log/vimbadmin.log
+        chmod 640 /etc/vimbadmin/*.ini
+        chown www-data.www-data /etc/vimbadmin/*.ini
+		;;
+esac
+
+#DEBHELPER#
+
+exit 0

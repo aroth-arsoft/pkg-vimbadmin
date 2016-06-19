@@ -4,6 +4,7 @@ Priority: extra
 Maintainer: Andreas Roth <aroth@arsoft-online.com>
 Build-Depends: debhelper (>= 9), php-cli, php-mbstring,
  php-symfony-console, php-doctrine-dbal, php-doctrine-orm,
+ libzend-framework-php (>= 1.12),
 Standards-Version: 3.9.7
 Vcs-Svn: https://github.com/opensolutions/ViMbAdmin.git
 Vcs-Browser: https://github.com/opensolutions/ViMbAdmin

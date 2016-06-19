@@ -37,11 +37,16 @@ override_dh_install:
 	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/bin/phpdoc.sh
 	chmod 0755 $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/bin/sync-gh.sh
 
+	# generate a clean private data directory
 	install -d -m 0750 -o www-data -g www-data $(DESTDIR)/var/lib/$(PKG)
-	cp -r var/* $(DESTDIR)/var/lib/$(PKG)
+	install -d -m 0750 -o www-data -g www-data $(DESTDIR)/var/lib/$(PKG)/templates_c
+	install -d -m 0750 -o www-data -g www-data $(DESTDIR)/var/lib/$(PKG)/tmp
+	install -d -m 0750 -o www-data -g www-data $(DESTDIR)/var/lib/$(PKG)/tmp/captchas
+	install -d -m 0750 -o www-data -g www-data $(DESTDIR)/var/lib/$(PKG)/cache
+	install -d -m 0750 -o www-data -g www-data $(DESTDIR)/var/lib/$(PKG)/session
+
 	ln -s ../../../../var/lib/$(PKG) $(DESTDIR)/usr/share/$(PKG)/var
-	rm -rf $(DESTDIR)/var/lib/$(PKG)/log
-	ln -s /var/log $(DESTDIR)/var/lib/$(PKG)/log
+	ln -s ../../log $(DESTDIR)/var/lib/$(PKG)/log
 	mkdir -p $(DESTDIR)/var/log
 	touch $(DESTDIR)/var/log/vimbadmin.log
 	chmod 640 $(DESTDIR)/var/log/vimbadmin.log
@@ -53,6 +58,10 @@ override_dh_install:
 	rm $(DESTDIR)/usr/share/vimbadmin/vendor/komola/bootstrap-zend-framework/LICENSE
 	rm $(DESTDIR)/usr/share/vimbadmin/vendor/doctrine/common/LICENSE
 	rm $(DESTDIR)/usr/share/vimbadmin/vendor/symfony/polyfill-mbstring/LICENSE
+
+	# the freeserif.ttf is not shipped with the package because it already available
+	# in the fonts-freefont-ttf package
+	ln -s /usr/share/fonts/truetype/freefont/FreeSerif.ttf $(DESTDIR)/usr/share/vimbadmin/vendor/opensolutions/oss-framework/data/font/freeserif.ttf
 
 	mkdir -p $(DESTDIR)/usr/bin
 	ln -s ../../usr/share/vimbadmin/bin/vimbtool.php $(DESTDIR)/usr/bin/vimbtool
