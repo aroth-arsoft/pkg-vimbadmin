@@ -1,3 +1,9 @@
+vimbadmin (3.0.15-0.7) xenial; urgency=medium
+
+  * fixed syntax error in cron tab
+
+ -- Andreas Roth <aroth@arsoft-online.com>  Sun, 28 Aug 2016 11:44:59 +0200
+
 vimbadmin (3.0.15-0.6) xenial; urgency=medium
 
   * add missing font files
